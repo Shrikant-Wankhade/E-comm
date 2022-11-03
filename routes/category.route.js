@@ -8,12 +8,13 @@ const routes = (app) =>{
      // to create a new category
     app.post("/ecom/api/v1/categories",CategoryController.createCategory);
 
-    //to delete a category
-    // app.delete("/ecom/api/v1/categories",CategoryController.deleteCategory);
-
     app.get("/ecom/api/v1/categories/:id",CategoryController.getCatById);
 
     app.get("/ecom/api/v1/categoriesbyName/",CategoryController.getCatByName);
+
+    app.put("/ecom/api/v1/categories/:id",CategoryController.updateACategory);
+
+    app.delete("/ecom/api/v1/categoriesbyName/",CategoryController.deleteACategory)
 }
 
 module.exports = routes;

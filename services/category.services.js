@@ -33,13 +33,35 @@ const getCategoryByName = async(nameData)=>{
     return response;
 }
 
-// const deleteACategory = async(data)=>{
-//     const deletedCategory = await Category.destroy({
-//         where:{
-//             name:data.name,
-//             cost: data.cost
-//         }
-//     })
-// }
 
-module.exports={getAllCategories,createNewCategory,getCategoryById,getCategoryByName};
+const updateCategory = async(id,data)=>{
+    const response = Category.update(
+    {
+        name:data.name,
+        description: data.description,
+        cost: data.cost
+    },
+    {
+    where: {
+        id: id
+    }  
+    });  
+    return response;
+}
+
+const deleteCategory = async(name)=>{
+    const response = Category.destroy({
+        where: {
+            name: name,
+        }
+    });
+    return response;
+}
+
+module.exports={updateCategory,
+    getAllCategories,
+    createNewCategory,
+    getCategoryById,
+    getCategoryByName,
+    deleteCategory,
+};

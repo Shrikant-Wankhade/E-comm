@@ -1,5 +1,9 @@
 const category = require('../models/category');
-const {createNewCategory, getAllCategories, getCategoryById,getCategoryByName} = require('../services/category.services');
+const {createNewCategory, 
+    getAllCategories, 
+    getCategoryById,getCategoryByName,
+    updateCategory,
+    deleteCategory} = require('../services/category.services');
 
 const getCategories = async (req,res)=>{
     const allCategoriesData = await getAllCategories(); //await needs to put here as it return a promise.
@@ -21,16 +25,6 @@ const createCategory = async(req,res)=>{
     })
 }
 
-// const deleteCategory = async(req,res)=>{
-//     const response = await deleteACategory(req.body);
-//     return res.json({
-//         "message":"successfully deleted the categories",
-//         "success":true,
-//         "code":201,
-//         data: response,
-//     })
-// }
-
 const getCatById = async(req,res)=>{
     const response = await getCategoryById(req.params.id);
     return res.json({
@@ -50,9 +44,33 @@ const getCatByName = async(req,res)=>{
         data: response,
     })
 }
+
+const updateACategory= async(req,res)=>{
+    const response = await updateCategory(req.params.id,req.body);
+    return res.json({
+        "message":"successfully updated the categories",
+        "success":true,
+        "code":201,
+        data: response,
+    })
+}
+
+const deleteACategory= async(req,res)=>{
+    const response = await deleteCategory(req.query.name);
+    return res.json({
+        "message":"successfully deleted the category",
+        "success":true,
+        "code":201,
+        data: response,
+    })
+}
+
+
 module.exports = {
     createCategory,
     getCategories,
     getCatByName,
-    getCatById
+    getCatById,
+    updateACategory,
+    deleteACategory,
 }
